@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <title>Songs You Know</title>
+    <style>
+      body {
+          background-color: #005A8C;
+      }
+      button {
+        background-color: #FF8E00;
+        border: none;
+        color: white;
+        padding: 10px 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14pt;
+        margin: 10px 2px 0px 48px;
+        cursor: pointer;
+        width: 300px;
+    }
+    form{
+
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      margin: auto;
+      margin-top: 200px;
+      height: 200px;
+      width: 400px;
+      text-align: center;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+      padding: 20px;
+      box-shadow: 0px 0px 20px #0b0b0b;
+    }
+    div1{
+      font-family: Arial;
+      font-size: 18pt;
+    }
+    div2{
+      text-align: center;
+    }
+
+    </style>
+  </head>
+  <body>
+
+    <form name = "theForm" method = "get" action="javascript:get();">
+      <div1>
+        <strong>Enter Your Birth Year </strong>
+      </div1>
+      <br>
+      <div2>
+
+      {% if year %}
+        <input id = "birth year" type = "text" value = "{{ year }}" >
+      {% else %}
+        <input id = "birth year" type = "text" value = "" >
+      {% endif %}
+      </div2>
+      <br>
+        <button type="button" onclick = "get();">Find Music</button>
+    </form>
+
+    <br/>
+    {% if embed %}
+      <iframe id = "theSong" width="854" height="480" src= "{{ embed }}" frameborder="0" allowfullscreen></iframe>
+    {% endif %}
+    <script type="text/javascript">
+
+      function get(){
+        var val = document.getElementById("birth year").value;
+
+        var url = "http://localhost:8000/song/" + val +"/";
+      //   alert(url);
+         window.location.assign(url);
+      }
+
+    </script>
+
+  </body>
+</html>
